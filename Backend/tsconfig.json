@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    /* === File Structure === */
+    "rootDir": "./src",       // Source files location
+    "outDir": "./dist",       // Compiled JS output folder
+
+    /* === Environment === */
+    "module": "commonjs",     // Node uses CommonJS by default
+    "target": "es2020",       // Modern JS features, Node 14+
+    "lib": ["es2020"],        // Core JS features
+    "types": ["node"],        // Include Node types
+
+    /* === Output === */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* === Type Checking === */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* === Module & Import Settings === */
+    "esModuleInterop": true,      // Allows default imports like `import express from 'express'`
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* === Module Detection === */
+    "moduleResolution": "node",   // Standard Node module resolution
+    "resolveJsonModule": true     // Allow importing JSON files
+  },
+  "include": ["src"],             // Include only your source folder
+  "exclude": ["node_modules"]     // Skip unnecessary folders
+}
