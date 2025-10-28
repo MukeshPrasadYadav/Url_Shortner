@@ -5,7 +5,8 @@ export interface Iuser extends Document{
     firstName:string,
     lastName:string,
     email:string,
-    password:string
+    password:string,
+    refreshToken:string
 }
 
 const userSchema=new mongoose.Schema<Iuser>({
@@ -34,6 +35,10 @@ const userSchema=new mongoose.Schema<Iuser>({
         required:[true,"Provide password"],
         minLength:[8,"Password must be atleast 8 characters"],
         maxlength:[64,"Password cannot exceed 64 character"]
+    },
+    refreshToken:{
+        type:String,
+        default:''
     }
 },
 {timestamps:true})

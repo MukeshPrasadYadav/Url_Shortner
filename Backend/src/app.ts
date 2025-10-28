@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 
-app.use(`/api/signUp`,authRoutes)
+app.use(`/api/auth`,authRoutes)
 
 app.use((err: any, req: any, res: any, next: any) => {
   logger.error(err.stack || err.message);

@@ -3,6 +3,6 @@ import { Router } from "express";
 
 const router=Router();
 
-router.post(`/SignUp`,SignUpUser);
+router.post(`/signUp`,SignUpUser);
 
 export default router;
