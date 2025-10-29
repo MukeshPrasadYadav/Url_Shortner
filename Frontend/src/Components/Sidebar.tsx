@@ -1,8 +1,9 @@
+import Sider from 'antd/es/layout/Sider'
 import React from 'react'
 
 const Sidebar = () => {
   return (
-    <div>Sidebar</div>
+    <Sider width={250} />
   )
 }
 
