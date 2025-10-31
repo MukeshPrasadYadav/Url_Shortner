@@ -4,12 +4,15 @@ import { Formik, Form, Field } from "formik";
 import { object, string } from "yup";
 import { useTheme } from "../../Providers/ThemeProvider";
 import { Link } from "react-router-dom";
+import { useSingUp } from "../../hooks/useAuth";
+
 
 const { Text, Title } = Typography;
 
 const SignUp = () => {
   const { isDark } = useTheme();
   const [open, setOpen] = useState(true);
+  const{ mutate:signUp,isPending,error,isSuccess}=useSingUp()
 
   const validationSchema = object({
     firstName: string().required("First name is required"),
@@ -54,8 +57,8 @@ const SignUp = () => {
           password: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log("✅ Submitted:", values);
+        onSubmit={ async(values) => {
+          signUp(values)
           setOpen(false);
         }}
       >
@@ -153,7 +156,7 @@ const SignUp = () => {
                 size="large"
                 className="w-full mt-2"
               >
-                Sign Up
+                {isPending? "signing Up ": "Sign Up" }
               </Button>
 
               <Divider style={{ margin: "1rem 0" }}>or</Divider>
@@ -166,7 +169,7 @@ const SignUp = () => {
                 }}
               >
                 Already have an account?{" "}
-                <Link to='/'  style={{ color: isDark ? "#722ed1" : "#1677ff" }}>
+                <Link to='/Login'  style={{ color: isDark ? "#722ed1" : "#1677ff" }}>
                     Login
                 </Link>
                   
@@ -176,6 +179,10 @@ const SignUp = () => {
           </Form>
         )}
       </Formik>
+      <div>
+        {error && <p className="text-red-600">{error.message.toString()}</p>}
+      </div>
+      <div >{isSuccess && <p className="text-green-700" >Signed Up sucess Fully </p>}</div>
     </Modal>
   );
 };

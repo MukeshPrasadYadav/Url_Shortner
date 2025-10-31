@@ -3,13 +3,17 @@ import { Button, Modal, Input, Typography } from "antd";
 import { Formik, Form, Field } from "formik";
 import { object, string } from "yup";
 import { useTheme } from "../../Providers/ThemeProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const { Text, Title } = Typography;
 
 const Login = () => {
   const { isDark } = useTheme();
-  const [open, setOpen] = useState(true);
+  const[error,setError]=React.useState<string>('');
+  const [open, setOpen] = React.useState<boolean>(true);
+  const navigate=useNavigate()
 
   const validationSchema = object({
     email: string().email("Invalid email address").required("Email is required"),
@@ -44,9 +48,12 @@ const Login = () => {
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log("✅ Submitted:", values);
-          setOpen(false);
+        onSubmit={async(values) => {
+          const res=await axios.post(`http://localhost:5000/api/auth/login`,values,{withCredentials:true});
+           if(res?.data?.success) console.log("res",res)
+          //   setError(res?.message)
+          console.log(res)
+        //  setOpen(false);
         }}
       >
         {({ values, handleChange, errors, touched, handleSubmit }) => (
